@@ -33,3 +33,5 @@ Review the affected pages on mobile and desktop. Check captions, keyboard naviga
 ## Colors and motion
 
 The homepage composition lives in `dist/editorial.css`. The active black/crimson palette, condensed display typography, and contrast overrides live in `dist/dark.css`, loaded after the other styles. Base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
+
+Scroll and pointer effects live in `dist/motion.js` and `dist/motion.css`. The decorative 3D orbit renderer is `dist/orbit-field.js`; the controller owns its animation loop. Keep the `portfolio:motionchange` event in `dist/site.js` connected when changing the footer motion control. Text and links must remain usable with motion off, on touch devices, and without JavaScript.

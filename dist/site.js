@@ -10,7 +10,7 @@ document.querySelector('#year').textContent=new Date().getFullYear();
 const reduce=matchMedia('(prefers-reduced-motion:reduce)');
 let off=reduce.matches;
 const motion=document.querySelector('#motion-toggle');
-function applyMotion(){document.documentElement.classList.toggle('motion-off',off);motion.textContent=off?'Motion off':'Motion on';motion.setAttribute('aria-pressed',String(off));}
+function applyMotion(){document.documentElement.classList.toggle('motion-off',off);motion.textContent=off?'Motion off':'Motion on';motion.setAttribute('aria-pressed',String(off));window.dispatchEvent(new CustomEvent('portfolio:motionchange',{detail:{enabled:!off}}));}
 applyMotion();
 motion.addEventListener('click',()=>{document.documentElement.classList.toggle('motion-override',off);off=!off;applyMotion();});
 reduce.addEventListener('change',event=>{off=event.matches;document.documentElement.classList.remove('motion-override');applyMotion();});

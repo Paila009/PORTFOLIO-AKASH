@@ -13,6 +13,8 @@ Routes: `/`, `/code/`, `/code/signal-lab/`, `/code/lilnest/`, `/code/motionbeatz
 - `templates/home.html`: retained previous homepage template.
 - `dist/editorial.css`: reference-inspired homepage composition.
 - `dist/dark.css`: shared black/crimson colors and typography.
+- `dist/motion.js` and `motion.css`: scroll parallax, section reveals, sliding type bands, pointer tilt, and reading progress.
+- `dist/orbit-field.js`: a dependency-free decorative canvas with perspective-projected 3D rings.
 - `lib/layout.mjs`: shared header, footer, metadata, and project previews.
 - `lib/galleries.mjs`: shared art and photography galleries.
 - `build.mjs`: pages, sitemap, and project-dialog data generation.
@@ -63,3 +65,7 @@ Contact uses email and supplied GitHub, LinkedIn, Instagram links. The paper is 
 The original `dist/assets/chrome-sculpture.png` was created with built-in imagegen. Prompt: “Premium studio render of a polished liquid-chrome ribbon knot with one acid-lime sphere, three-quarter view, isolated transparent background, no text or logos.” This is site decoration. Project SVGs are interface concepts. Gallery placeholder SVGs are clearly labeled development assets.
 
 The current `crimson-sculpture.png` is an imagegen edit of that decoration. Prompt: preserve the original sculpture geometry, silhouette, camera, and framing; replace the lime sphere and reflections with polished crimson, darker chrome, and silver highlights; transparent background; no people, text, logos, extra objects, or backgrounds. Responsive WebP variants at 480, 900, and 1254 pixels preserve transparency. No portrait of Akash has been supplied; the centerpiece is decorative, not a representation of him.
+
+## Motion
+
+Scrolling stays native. The hero has scroll-driven translation, scale, and 3D rotation; its orbit field uses perspective projection. Opposing typography bands slide with scroll, section reveals stagger into view, and cards combine scroll depth with pointer tilt. Touch devices use gentler effects and no hover tilt. The footer Motion control and system reduced-motion setting disable the effects. Content remains visible without JavaScript. Rendering pauses when the page is hidden and the orbit field is offscreen.
