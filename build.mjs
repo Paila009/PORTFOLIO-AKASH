@@ -18,7 +18,7 @@ home = home.replace("I'm <strong>Paila Akash.</strong> Developer, artist, photog
 home = home.replace('<a class="button button-dark" href="#work">Explore my work <span aria-hidden="true">↗</span></a>','<div class="hero-actions"><a class="button button-dark" href="#work">Explore my work <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="/about/#contact">Get in touch ↗</a></div>');
 home = home.replace('<meta property="og:type" content="website">',`<meta property="og:type" content="website"><meta property="og:url" content="${siteUrl}/"><meta property="og:image" content="${siteUrl}/assets/chrome-sculpture.png"><link rel="canonical" href="${siteUrl}/">`);
 home = home.replace('<script src="./script.js" defer></script>','<script src="./project-data.js" defer></script><script src="./script.js" defer></script>');
-home = home.replace('<link rel="stylesheet" href="./style.css">','<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./pages.css">');
+home = home.replace('<link rel="stylesheet" href="./style.css">','<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./pages.css"><link rel="stylesheet" href="./dark.css">');
 const bio = profile.bio.map(paragraph=>`<p>${e(paragraph)}</p>`).join('');
 home = home.replace(/<p>I'm a third-year Computer Science student[\s\S]*?<div class="about-facts">/,bio+'<div class="about-facts">');
 home = home.replaceAll('pailaakash041@gmail.com',e(profile.email)).replaceAll('https://github.com/Paila009',e(profile.github)).replaceAll('https://www.linkedin.com/in/paila-akash-560a39391/',e(profile.linkedin)).replaceAll('https://www.instagram.com/aakash.reddie/',e(profile.instagram));

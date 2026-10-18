@@ -32,4 +32,4 @@ Review the affected pages on mobile and desktop. Check captions, keyboard naviga
 
 ## Colors and motion
 
-Core colors/fonts live in `dist/style.css` under `:root`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
+The active dark palette and contrast overrides live in `dist/dark.css`, loaded after the other styles. Fonts and base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.

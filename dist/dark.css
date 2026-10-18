@@ -1,0 +1,82 @@
+/* Shared dark palette, loaded last across every page and dialog. */
+:root {
+  color-scheme: dark;
+  --paper: #121510;
+  --ink: #f2f3eb;
+  --muted: #acb3a2;
+  --lime: #c4f465;
+  --line: #343c2e;
+  --surface: #1b2117;
+  --on-lime: #17200f;
+}
+
+body { background: var(--paper); color: var(--ink); }
+body::after { opacity: .022; mix-blend-mode: screen; }
+::selection { background: var(--lime); color: var(--on-lime); }
+a:focus-visible, button:focus-visible,
+.gallery-page a:focus-visible, .gallery-page button:focus-visible {
+  outline-color: var(--lime);
+}
+
+.hero-art::before {
+  content: '';
+  position: absolute;
+  inset: 12% -3% 2%;
+  background: radial-gradient(ellipse, #a2d45116, transparent 65%);
+  pointer-events: none;
+}
+.sculpture { mix-blend-mode: normal; filter: drop-shadow(0 30px 35px #0008); }
+.orbit { border-color: #435036; }
+.lime-period, .about-monogram > span, .about-page-statement > span { color: var(--lime); }
+.status-dot { background: var(--lime); box-shadow: 0 0 0 4px #c4f4650d; }
+.art-sticker { border-color: var(--lime); color: var(--on-lime); }
+.hero-intro p, .hero-bottom, .art-coordinate, .art-caption, .art-cross,
+.monogram-caption, .about-copy > p, .about-facts strong span, .about-facts > div > span,
+.skill-row > div span, .note p, .note-status, .credentials p,
+.site-footer > span, #motion-toggle, .dialog-intro, .dialog-description, .dialog-footnote,
+.page-intro > p, .skills-groups p, .case-intro > p, .case-image figcaption,
+.case-details p, .case-details li, .about-page-bio > p, .education-box p,
+.about-contact > p { color: var(--muted); }
+.hero-intro strong, .about-monogram, .dialog-description h3 { color: var(--ink); }
+
+.button-dark { background: var(--lime); color: var(--on-lime); }
+.button-dark:hover, .button-lime:hover { background: #d7ff91; color: var(--on-lime); }
+.button-lime, .ticker, .contact-arrow, .skip-link { color: var(--on-lime); }
+.ticker { border-color: #a7d554; }
+.contact-link { border-color: #6c7860; }
+.button-outline { border-color: #6c7860; }
+.contact-link:hover, .button-outline:hover, .copy-email:hover,
+.project-image:hover .project-open { background: var(--lime); color: var(--on-lime); }
+.project-open { background: #1b2117; color: var(--ink); border: 1px solid #64714f; }
+.project-image, .case-image img, .gallery-image-wrap { background: var(--surface); }
+.project-image::after { border-color: #ffffff12; }
+.tags span { color: #c0c8b5; border-color: #45503b; background: #ffffff02; }
+
+.about-section { background: var(--surface); border-color: var(--line); }
+.about-facts, .skill-row, .credentials, #motion-toggle { border-color: #3e4835; }
+.note-status i { background: var(--lime); }
+.credentials p span { color: #a6c681; }
+.creative-section { background: #0c1109; color: var(--ink); }
+.creative-playground { background: #182013; border-color: #405033; }
+.creative-top, .creative-footer { color: #afbba0; }
+.creative-copy p, .instagram-handle { color: #c0c9b6; }
+.discipline-links, .discipline-links > a + a, .creative-footer { border-color: #35432a; }
+.home-gallery-previews img { border: 1px solid #3b4533; }
+.contact-word { color: #a0b189; }
+.contact-main:hover .contact-word { color: var(--lime); }
+.subpage .text-link:hover, .gallery-instagram:hover { color: var(--lime); }
+
+dialog { background: #1b2117; border-color: #526044; box-shadow: 0 30px 100px #000a; }
+dialog::backdrop { background: #050804cc; }
+.dialog-header, .dialog-footnote { border-color: var(--line); }
+.gallery-notice-symbol, .gallery-open-label span,
+.gallery-card:hover .gallery-open-label { color: var(--on-lime); }
+.gallery-open-label { background: #1b2117; color: var(--ink); border: 1px solid #526044; }
+.gallery-placeholder-tag { background: #171d13ed; border-color: #657352; color: #e1e8d6; }
+.gallery-viewer { background: #1b2117; color: var(--ink); border-color: #526044; }
+.gallery-viewer-stage { background: #0b1008; }
+.gallery-viewer-nav:hover:not(:disabled) { color: var(--on-lime); }
+
+@media(max-width:760px) {
+  .site-header nav { background: #171d13; border-bottom-color: #45513a; }
+}

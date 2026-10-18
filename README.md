@@ -1,6 +1,6 @@
 # Paila Akash — Code, Canvas & Camera
 
-An editorial portfolio for a Computer Science Engineering student, artist, and photographer. Warm ivory, charcoal, electric lime, expressive serif headlines, an original chrome sculpture, and a generative canvas establish the visual identity.
+An editorial portfolio for a Computer Science Engineering student, artist, and photographer. Deep charcoal, warm off-white type, electric lime, expressive serif headlines, an original chrome sculpture, and a generative canvas establish the visual identity.
 
 ## Architecture
 
