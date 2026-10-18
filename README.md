@@ -1,6 +1,6 @@
 # Paila Akash — Code, Canvas & Camera
 
-An editorial portfolio for a Computer Science Engineering student, artist, and photographer. Deep charcoal, warm off-white type, electric lime, expressive serif headlines, an original chrome sculpture, and a generative canvas establish the visual identity.
+An editorial portfolio for a Computer Science Engineering student, artist, and photographer. Near-black surfaces, crimson accents, oversized condensed typography, a layered chrome hero, and compact editorial sections establish the visual identity. The design follows the supplied black-and-red reference while using Akash’s own content.
 
 ## Architecture
 
@@ -9,7 +9,10 @@ HTML, CSS, and browser JavaScript, with a small Node.js static generator and loc
 Routes: `/`, `/code/`, `/code/signal-lab/`, `/code/lilnest/`, `/code/motionbeatz/`, `/art/`, `/photography/`, `/about/`, and a custom `404.html`.
 
 - `content/`: editable profile, projects, artwork, and photography.
-- `templates/home.html`: homepage structure.
+- `lib/home.mjs`: active homepage structure.
+- `templates/home.html`: retained previous homepage template.
+- `dist/editorial.css`: reference-inspired homepage composition.
+- `dist/dark.css`: shared black/crimson colors and typography.
 - `lib/layout.mjs`: shared header, footer, metadata, and project previews.
 - `lib/galleries.mjs`: shared art and photography galleries.
 - `build.mjs`: pages, sitemap, and project-dialog data generation.
@@ -57,4 +60,6 @@ Contact uses email and supplied GitHub, LinkedIn, Instagram links. The paper is 
 
 ## Asset provenance
 
-`dist/assets/chrome-sculpture.png` was created with built-in imagegen. Prompt: “Premium studio render of a polished liquid-chrome ribbon knot with one acid-lime sphere, three-quarter view, isolated transparent background, no text or logos.” This is site decoration. Project SVGs are interface concepts. Gallery placeholder SVGs are clearly labeled development assets.
+The original `dist/assets/chrome-sculpture.png` was created with built-in imagegen. Prompt: “Premium studio render of a polished liquid-chrome ribbon knot with one acid-lime sphere, three-quarter view, isolated transparent background, no text or logos.” This is site decoration. Project SVGs are interface concepts. Gallery placeholder SVGs are clearly labeled development assets.
+
+The current `crimson-sculpture.png` is an imagegen edit of that decoration. Prompt: preserve the original sculpture geometry, silhouette, camera, and framing; replace the lime sphere and reflections with polished crimson, darker chrome, and silver highlights; transparent background; no people, text, logos, extra objects, or backgrounds. Responsive WebP variants at 480, 900, and 1254 pixels preserve transparency. No portrait of Akash has been supplied; the centerpiece is decorative, not a representation of him.

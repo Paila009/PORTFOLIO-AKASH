@@ -1,8 +1,9 @@
 import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { layout, header, footer, projectCard, escapeHtml as e } from './lib/layout.mjs';
+import { layout, projectCard, escapeHtml as e } from './lib/layout.mjs';
 import { renderGallery } from './lib/galleries.mjs';
+import { renderHome } from './lib/home.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const json = async file => JSON.parse(await readFile(path.join(root,'content',file),'utf8'));
@@ -10,26 +11,8 @@ const [profile,projects,artwork,photography] = await Promise.all(['profile.json'
 const siteUrl = process.env.SITE_URL || 'https://aakash-reddie.pailaakash041.chatgpt.site';
 const routes = ['/','/code/','/art/','/photography/','/about/'];
 const writePage = async (route,html) => { const destination=path.join(root,'dist',route==='/'?'index.html':route.slice(1)+'index.html'); await mkdir(path.dirname(destination),{recursive:true}); await writeFile(destination,html); };
-let home = await readFile(path.join(root,'templates/home.html'),'utf8');
-home = home.replace(/<header class="site-header wrap">[\s\S]*?<\/header>/, header());
-home = home.replace(/<footer class="site-footer wrap">[\s\S]*?<\/footer>/, footer(profile));
-home = home.replace('A CREATIVE MIND WITH ENGINEERING ROOTS','CODE, CANVAS & CAMERA');
-home = home.replace("I'm <strong>Paila Akash.</strong> Developer, artist, photographer.<br>A curious mind building things that mean something.", `I'm <strong>${e(profile.name)}.</strong> ${e(profile.role)}.<br> A curious mind building things that mean something.`);
-home = home.replace('<a class="button button-dark" href="#work">Explore my work <span aria-hidden="true">↗</span></a>','<div class="hero-actions"><a class="button button-dark" href="#work">Explore my work <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="/about/#contact">Get in touch ↗</a></div>');
-home = home.replace('<meta property="og:type" content="website">',`<meta property="og:type" content="website"><meta property="og:url" content="${siteUrl}/"><meta property="og:image" content="${siteUrl}/assets/chrome-sculpture.png"><link rel="canonical" href="${siteUrl}/">`);
-home = home.replace('<script src="./script.js" defer></script>','<script src="./project-data.js" defer></script><script src="./script.js" defer></script>');
-home = home.replace('<link rel="stylesheet" href="./style.css">','<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./pages.css"><link rel="stylesheet" href="./dark.css">');
 const bio = profile.bio.map(paragraph=>`<p>${e(paragraph)}</p>`).join('');
-home = home.replace(/<p>I'm a third-year Computer Science student[\s\S]*?<div class="about-facts">/,bio+'<div class="about-facts">');
-home = home.replaceAll('pailaakash041@gmail.com',e(profile.email)).replaceAll('https://github.com/Paila009',e(profile.github)).replaceAll('https://www.linkedin.com/in/paila-akash-560a39391/',e(profile.linkedin)).replaceAll('https://www.instagram.com/aakash.reddie/',e(profile.instagram));
-home = home.replace('<strong>9.45<span>/10</span></strong>',`<strong>${e(String(profile.cgpa).split('/')[0].trim())}<span>/10</span></strong>`);
-const homeCard=(project,index)=>`<article class="project ${index===0?'project-featured ':''}reveal"><button class="project-image ${index===1?'project-lilnest':''}" data-project="${['signal','lilnest','motion'][index]}" aria-label="Explore ${e(project.title)}"><img src="${e(project.image)}" alt="${e(project.imageAlt)}" width="1200" height="800" loading="lazy"><span class="project-image-label">INTERFACE CONCEPT / ${e(project.kicker)}</span><span class="project-open" aria-hidden="true">↗</span></button><div class="project-meta"><div><span class="eyebrow">0${index+1} / ${e(project.kicker)}</span><h3><button data-project="${['signal','lilnest','motion'][index]}">${e(project.tagline)}</button></h3><p>${e(project.title)}</p></div>${index===0?`<div class="tags">${project.technologies.map(tag=>`<span>${e(tag)}</span>`).join('')}</div>`:''}</div>${index!==0?`<div class="tags">${project.technologies.map(tag=>`<span>${e(tag)}</span>`).join('')}</div>`:''}</article>`;
-const projectStart=home.indexOf('      <article class="project project-featured reveal">');
-const projectEnd=home.indexOf('    </section>',projectStart);
-home=home.slice(0,projectStart)+homeCard(projects[0],0)+`<div class="project-grid">${projects.slice(1,3).map((project,index)=>homeCard(project,index+1)).join('')}</div><a class="text-link github-link" href="/code/">All code projects <span aria-hidden="true">↗</span></a>`+home.slice(projectEnd);
-home = home.replace('<div class="creative-footer">',`<div class="home-gallery-previews"><a href="/art/"><img src="/assets/placeholder-art.svg" alt="Development placeholder for the art gallery" width="1200" height="900" loading="lazy"><span class="eyebrow">CANVAS / ART GALLERY</span><h3>Another way to think.</h3><p>Personal artwork to be added. Explore the space ↗</p></a><a href="/photography/"><img src="/assets/placeholder-photo.svg" alt="Development placeholder for the photography gallery" width="1200" height="900" loading="lazy"><span class="eyebrow">CAMERA / VISUAL STORIES</span><h3>Another way to see.</h3><p>Personal photographs to be added. Explore the space ↗</p></a></div><div class="creative-footer">`);
-home = home.replace('<div class="creative-footer">','<div class="discipline-links"><a href="/code/">01 / Code <span>Build useful things ↗</span></a><a href="/art/">02 / Canvas <span>Explore the art space ↗</span></a><a href="/photography/">03 / Camera <span>Explore the photo space ↗</span></a></div><div class="creative-footer">');
-await writePage('/',home);
+await writePage('/',renderHome({profile,projects,siteUrl}));
 
 const projectData={};
 projects.forEach((project,index)=>{const key=['signal','lilnest','motion'][index]||project.slug; projectData[key]={eyebrow:`0${index+1} / ${project.kicker}`,title:project.tagline||project.title,intro:project.summary,tags:project.technologies,sections:[['The project',project.problem],['My contribution',project.contribution],['The approach',project.approach]],links:[['Read the full project',`/code/${project.slug}/`],...(project.github?[['Explore the repository',project.github]]:[]),...(project.live?[['Visit the live project',project.live]]:[])]};});
@@ -50,5 +33,5 @@ await writePage('/about/',page({title:'The person — Paila Akash',description:'
 await writeFile(path.join(root,'dist/404.html'),page({title:'Page not found — Paila Akash',description:'This page is missing. Find your way back to Akash’s portfolio.',path:'/404.html',body:'<section class="wrap page-intro not-found"><span class="eyebrow">404 / A LITTLE OFF THE MAP</span><h1>Lost in<br><em>the making.</em></h1><p>This page isn’t here. There’s plenty to explore back at the start.</p><a class="button button-dark" href="/">Back to the portfolio ↗</a></section>'}));
 await writeFile(path.join(root,'dist/sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route=>`<url><loc>${siteUrl}${route}</loc></url>`).join('')}</urlset>`);
 await writeFile(path.join(root,'dist/robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`);
-for (const asset of ['chrome-sculpture.png','Paila-Akash-Resume.pdf','signal-lab.svg','lilnest.svg','motionbeatz.svg']) await access(path.join(root,'dist/assets',asset));
+for (const asset of ['crimson-sculpture.png','crimson-sculpture-480.webp','crimson-sculpture-900.webp','crimson-sculpture-1254.webp','Paila-Akash-Resume.pdf','signal-lab.svg','lilnest.svg','motionbeatz.svg']) await access(path.join(root,'dist/assets',asset));
 console.log(`Built ${routes.length} pages + 404, sitemap, and structured project data.`);

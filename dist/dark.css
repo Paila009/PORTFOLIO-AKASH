@@ -1,82 +1,106 @@
-/* Shared dark palette, loaded last across every page and dialog. */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;500&display=swap');
+
+/* Shared black and crimson identity. Loaded after the base and page styles. */
 :root {
   color-scheme: dark;
-  --paper: #121510;
-  --ink: #f2f3eb;
-  --muted: #acb3a2;
-  --lime: #c4f465;
-  --line: #343c2e;
-  --surface: #1b2117;
-  --on-lime: #17200f;
+  --paper: #080808;
+  --ink: #f3efed;
+  --muted: #b1a7aa;
+  --red: #f04459;
+  --lime: #ee344d;
+  --line: #2b1c21;
+  --surface: #130d10;
+  --on-lime: #080808;
+  --condensed: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
+  --display: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
 }
-
 body { background: var(--paper); color: var(--ink); }
-body::after { opacity: .022; mix-blend-mode: screen; }
-::selection { background: var(--lime); color: var(--on-lime); }
+body::after { opacity: .018; mix-blend-mode: screen; }
+::selection { background: var(--red); color: #080808; }
+.wrap { max-width: 1480px; padding-left: 4%; padding-right: 4%; }
 a:focus-visible, button:focus-visible,
-.gallery-page a:focus-visible, .gallery-page button:focus-visible {
-  outline-color: var(--lime);
-}
-
-.hero-art::before {
-  content: '';
-  position: absolute;
-  inset: 12% -3% 2%;
-  background: radial-gradient(ellipse, #a2d45116, transparent 65%);
-  pointer-events: none;
-}
-.sculpture { mix-blend-mode: normal; filter: drop-shadow(0 30px 35px #0008); }
-.orbit { border-color: #435036; }
-.lime-period, .about-monogram > span, .about-page-statement > span { color: var(--lime); }
-.status-dot { background: var(--lime); box-shadow: 0 0 0 4px #c4f4650d; }
-.art-sticker { border-color: var(--lime); color: var(--on-lime); }
-.hero-intro p, .hero-bottom, .art-coordinate, .art-caption, .art-cross,
-.monogram-caption, .about-copy > p, .about-facts strong span, .about-facts > div > span,
-.skill-row > div span, .note p, .note-status, .credentials p,
-.site-footer > span, #motion-toggle, .dialog-intro, .dialog-description, .dialog-footnote,
-.page-intro > p, .skills-groups p, .case-intro > p, .case-image figcaption,
-.case-details p, .case-details li, .about-page-bio > p, .education-box p,
-.about-contact > p { color: var(--muted); }
-.hero-intro strong, .about-monogram, .dialog-description h3 { color: var(--ink); }
-
-.button-dark { background: var(--lime); color: var(--on-lime); }
-.button-dark:hover, .button-lime:hover { background: #d7ff91; color: var(--on-lime); }
-.button-lime, .ticker, .contact-arrow, .skip-link { color: var(--on-lime); }
-.ticker { border-color: #a7d554; }
-.contact-link { border-color: #6c7860; }
-.button-outline { border-color: #6c7860; }
-.contact-link:hover, .button-outline:hover, .copy-email:hover,
-.project-image:hover .project-open { background: var(--lime); color: var(--on-lime); }
-.project-open { background: #1b2117; color: var(--ink); border: 1px solid #64714f; }
+.gallery-page a:focus-visible, .gallery-page button:focus-visible { outline-color: #ff526d; }
+.site-header { height: 77px; border-bottom-color: var(--line); }
+.site-header .wordmark { font-family: var(--condensed); font-size: 31px; font-weight: 400; letter-spacing: .1px; text-transform: uppercase; }
+.wordmark-star { color: var(--red); font-size: 24px; margin-left: 6px; }
+.site-header nav { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; gap: 30px; }
+.site-header nav a::after { background: var(--red); }
+.site-header nav a:hover, .site-header nav a[aria-current=page] { color: var(--red); }
+.contact-link { border-radius: 0; border: 0; padding: 10px 0 10px 15px; font-size: 9px; letter-spacing: .7px; text-transform: uppercase; gap: 25px; }
+.contact-link > span { color: var(--red); font-size: 20px; }
+.contact-link:hover { background: none; color: var(--red); }
+.button { border-radius: 0; }
+.button-dark,.button-lime { background: var(--red); color: #080808; }
+.button-dark:hover,.button-lime:hover { background: #ff6c82; color: #080808; }
+.button-outline { border-color: #78414e; }
+.button-outline:hover { background: var(--red); color: #080808; }
+.skip-link { color: #080808; }
+.eyebrow { color: #e2778a; }
+.text-link { border-bottom-color: #773141; }
+.text-link:hover,.subpage .text-link:hover { color: var(--red); }
+.project-open { background: #170d12; color: var(--ink); border: 1px solid #793144; }
+.project-image:hover .project-open { background: var(--red); color: #080808; }
 .project-image, .case-image img, .gallery-image-wrap { background: var(--surface); }
 .project-image::after { border-color: #ffffff12; }
-.tags span { color: #c0c8b5; border-color: #45503b; background: #ffffff02; }
-
-.about-section { background: var(--surface); border-color: var(--line); }
-.about-facts, .skill-row, .credentials, #motion-toggle { border-color: #3e4835; }
-.note-status i { background: var(--lime); }
-.credentials p span { color: #a6c681; }
-.creative-section { background: #0c1109; color: var(--ink); }
-.creative-playground { background: #182013; border-color: #405033; }
-.creative-top, .creative-footer { color: #afbba0; }
-.creative-copy p, .instagram-handle { color: #c0c9b6; }
-.discipline-links, .discipline-links > a + a, .creative-footer { border-color: #35432a; }
-.home-gallery-previews img { border: 1px solid #3b4533; }
-.contact-word { color: #a0b189; }
-.contact-main:hover .contact-word { color: var(--lime); }
-.subpage .text-link:hover, .gallery-instagram:hover { color: var(--lime); }
-
-dialog { background: #1b2117; border-color: #526044; box-shadow: 0 30px 100px #000a; }
-dialog::backdrop { background: #050804cc; }
-.dialog-header, .dialog-footnote { border-color: var(--line); }
-.gallery-notice-symbol, .gallery-open-label span,
-.gallery-card:hover .gallery-open-label { color: var(--on-lime); }
-.gallery-open-label { background: #1b2117; color: var(--ink); border: 1px solid #526044; }
-.gallery-placeholder-tag { background: #171d13ed; border-color: #657352; color: #e1e8d6; }
-.gallery-viewer { background: #1b2117; color: var(--ink); border-color: #526044; }
-.gallery-viewer-stage { background: #0b1008; }
-.gallery-viewer-nav:hover:not(:disabled) { color: var(--on-lime); }
-
+.project-image-label { background: #080808b8; color: #e8dfe2; padding: 5px 7px; opacity: 1; }
+.tags span { color: #c9b9bf; border-color: #51323d; background: #ffffff02; border-radius: 0; font-size: 9px; }
+.page-intro h1,.case-intro h1,.gallery-title { font-family: var(--condensed); font-weight: 400; letter-spacing: -.018em; text-transform: uppercase; }
+.page-intro h1 em,.case-intro h1 em,.gallery-title em,.skills-section h2 em,.about-page-statement h2 em,.about-contact h2 em { font: inherit; letter-spacing: inherit; color: var(--red); }
+.page-intro h1 { font-size: clamp(90px,10.7vw,155px); line-height: .9; }
+.page-intro { padding-top: 65px; padding-bottom: 60px; }
+.page-intro > p,.skills-groups p,.case-intro > p,.case-image figcaption,
+.case-details p,.case-details li,.about-page-bio > p,.education-box p,
+.about-contact > p { color: var(--muted); }
+.code-card .project-meta h2,.case-details h2,.skills-section h2,.about-page-statement h2,.about-contact h2 { font-family: var(--condensed); font-weight: 400; letter-spacing: -.02em; text-transform: uppercase; }
+.code-card .project-meta h2 { font-size: 39px; }
+.case-details h2 { font-size: 36px; }
+.case-intro h1 { font-size: clamp(56px,7vw,105px); }
+.skills-section h2 { font-size: 75px; }
+.skills-groups h3 { color: #ea7f95; }
+.about-page-statement > span { color: var(--red); }
+.about-page-statement h2 { font-size: 64px; line-height: 1; }
+.about-contact h2 { font-size: 86px; }
+.about-socials a:hover { color: var(--red); }
+.gallery-page { max-width: 1480px; padding-left: 4%; padding-right: 4%; }
+.gallery-title { font-size: clamp(76px,9vw,135px); }
+.gallery-title em { white-space: normal; }
+.gallery-item-title { font-size: 34px; letter-spacing: -.3px; font-weight: 400; text-transform: uppercase; }
+.gallery-notice-symbol,.gallery-open-label span,.gallery-card:hover .gallery-open-label { color: #080808; }
+.gallery-open-label { background: #170d12; color: var(--ink); border: 1px solid #793144; border-radius: 0; }
+.gallery-placeholder-tag { background: #120b10eb; border-color: #815465; color: #eadde2; }
+.gallery-instagram:hover { color: var(--red); }
+dialog,.gallery-viewer { background: #130d10; color: var(--ink); border-color: #793144; box-shadow: 0 30px 100px #000a; }
+dialog::backdrop { background: #050304dd; }
+.gallery-viewer-stage { background: #080608; }
+.gallery-viewer-top,.gallery-keyboard-hint { border-color: var(--line); }
+.gallery-viewer-count,.gallery-viewer-caption p,.gallery-keyboard-hint { color: #b7a8af; }
+.gallery-viewer-title { font-family: var(--condensed); font-size: 38px; letter-spacing: 0; }
+.gallery-viewer-nav { border-color: #704150; }
+.gallery-viewer-nav:hover:not(:disabled) { color: #080808; }
+.site-footer { padding-top: 23px; padding-bottom: 23px; }
+.site-footer .wordmark { font-family: var(--condensed); font-weight: 400; font-size: 27px; text-transform: uppercase; letter-spacing: .3px; }
+.site-footer .wordmark-star { font-size: 23px; }
+.site-footer > span,#motion-toggle { color: #a7999e; }
+.footer-socials { font-size: 9px; }
+.footer-socials a:hover { color: var(--red); }
+#motion-toggle { border-color: #5f3543; }
+.back-top { color: var(--red); }
 @media(max-width:760px) {
-  .site-header nav { background: #171d13; border-bottom-color: #45513a; }
+  .wrap,.gallery-page { padding-left: 6%; padding-right: 6%; }
+  .site-header { height: 67px; }
+  .site-header .wordmark { font-size: 29px; }
+  .site-header nav { top: 66px; background: #10090d; border-bottom-color: #5c2a3a; font-size: 14px; gap: 16px; }
+  .site-header .contact-link { font-size: 8px; padding: 10px 0; gap: 14px; }
+  .site-header .contact-link > span { font-size: 18px; }
+  .page-intro { padding-top: 43px; padding-bottom: 40px; }
+  .page-intro h1 { font-size: clamp(76px,15vw,105px); letter-spacing: -.02em; }
+  .gallery-title { font-size: clamp(65px,13vw,92px); letter-spacing: -.02em; }
+  .case-intro h1 { font-size: 50px; letter-spacing: -.02em; }
+  .code-card .project-meta h2 { font-size: 35px; letter-spacing: -.02em; }
+  .case-details h2 { font-size: 32px; }
+  .skills-section h2 { font-size: 58px; }
+  .about-page-statement h2 { font-size: 56px; }
+  .about-contact h2 { font-size: 61px; }
+  .about-contact > .email-link { font-size: 18px; letter-spacing: -.6px; }
+  .gallery-item-title { font-size: 31px; }
 }

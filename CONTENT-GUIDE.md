@@ -4,7 +4,7 @@
 
 Edit `content/profile.json`. Keep valid JSON: double quotes, commas between properties, no trailing commas. `bio` is an array of paragraphs, `skills` maps group names to arrays, and social links are complete HTTPS URLs. `resumePath` points to a file inside `dist/`. Replace the existing résumé PDF at that path or change the path.
 
-The homepage has editorial headings in `templates/home.html`; its bio, contact links, project previews, and CGPA come from the content files. Dedicated pages use shared layouts in `lib/layout.mjs`. If you change your current year, review the homepage fact labels too.
+The active homepage has editorial headings in `lib/home.mjs`; contact links, project previews, education year, and CGPA come from the content files. Its concise featured project titles are keyed by slug there. The original `templates/home.html` is retained for reference. Dedicated pages use shared layouts in `lib/layout.mjs`. If you change your current year, review the homepage fact labels too.
 
 ## Coding projects
 
@@ -32,4 +32,4 @@ Review the affected pages on mobile and desktop. Check captions, keyboard naviga
 
 ## Colors and motion
 
-The active dark palette and contrast overrides live in `dist/dark.css`, loaded after the other styles. Fonts and base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
+The homepage composition lives in `dist/editorial.css`. The active black/crimson palette, condensed display typography, and contrast overrides live in `dist/dark.css`, loaded after the other styles. Base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
