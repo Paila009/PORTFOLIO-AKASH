@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aakash-reddie.pailaakash041.chatgpt.site/sitemap.xml

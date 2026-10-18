@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" fill="none">
+  <defs><pattern id="lines" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M0 18 18 0" stroke="#5A5547" stroke-opacity=".16" stroke-width="1"/></pattern></defs>
+  <path fill="#E9E6DB" d="M0 0h1200v1500H0z"/>
+  <rect x="102" y="151" width="996" height="1198" fill="#F7F5EB"/>
+  <path d="M173 1237h854M173 264h854" stroke="#D5D2C5" stroke-width="1.5"/>
+  <text x="175" y="223" fill="#726E60" font-family="Arial,sans-serif" font-size="17" letter-spacing="4">CANVAS PREVIEW</text>
+  <text x="1024" y="223" fill="#726E60" font-family="Arial,sans-serif" font-size="17" text-anchor="end">01 / 02</text>
+  <circle cx="477" cy="637" r="228" fill="#CD775C"/>
+  <path d="M516 558h345v432H516z" fill="#242B25"/>
+  <path d="M277 768h277v277H277z" fill="url(#lines)"/>
+  <path d="M729 867c0-103 84-187 187-187v374H729V867Z" fill="#BED48A"/>
+  <circle cx="389" cy="931" r="95" fill="#E5B887"/>
+  <path d="M252 1105c138-199 369-467 691-698" stroke="#6C7260" stroke-width="2"/>
+  <circle cx="671" cy="661" r="179" stroke="#F7F5EB" stroke-width="2"/>
+  <path d="M187 367h27m-13-14v27M982 1132h27m-13-14v27" stroke="#888A78" stroke-width="2"/>
+  <text x="175" y="1290" fill="#726E60" font-family="Arial,sans-serif" font-size="15" letter-spacing="2.4">DEVELOPMENT PLACEHOLDER</text>
+  <text x="1024" y="1290" fill="#726E60" font-family="Arial,sans-serif" font-size="15" text-anchor="end">PERSONAL ARTWORK TO COME</text>
+</svg>

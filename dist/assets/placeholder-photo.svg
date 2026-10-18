@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
+  <path fill="#D9DFDD" d="M0 0h1600v1200H0z"/>
+  <rect x="117" y="110" width="1366" height="980" fill="#E8EBE3"/>
+  <path d="M198 195h1204v810H198z" fill="#DCE3DF"/>
+  <circle cx="1006" cy="452" r="135" fill="#D1CEAC"/>
+  <path d="m198 795 330-290 342 290H198Z" fill="#AEBAB2"/>
+  <path d="m496 867 437-401 469 401H496Z" fill="#889D92"/>
+  <path d="M198 795h1204v210H198z" fill="#C4D0C3"/>
+  <path d="M198 867h1204v138H198z" fill="#B3C0B1"/>
+  <path d="M198 935h1204v70H198z" fill="#9CAFA0"/>
+  <g stroke="#F6F7EF" stroke-width="2" stroke-opacity=".55"><path d="M600 195v810M1000 195v810M198 465h1204M198 735h1204"/></g>
+  <g stroke="#4E6054" stroke-width="3"><path d="M244 297v-55h55m1002 0h55v55M244 903v55h55m1002 0h55v-55"/><path d="M781 600h38m-19-19v38"/></g>
+  <text x="153" y="163" fill="#65776C" font-family="Arial,sans-serif" font-size="17" letter-spacing="4">CAMERA PREVIEW</text>
+  <text x="1446" y="163" fill="#65776C" font-family="Arial,sans-serif" font-size="16" text-anchor="end">ABSTRACT FRAME / NOT A PHOTOGRAPH</text>
+  <text x="153" y="1058" fill="#65776C" font-family="Arial,sans-serif" font-size="15" letter-spacing="2.4">DEVELOPMENT PLACEHOLDER</text>
+  <text x="1446" y="1058" fill="#65776C" font-family="Arial,sans-serif" font-size="15" text-anchor="end">PERSONAL PHOTOGRAPHY TO COME</text>
+</svg>

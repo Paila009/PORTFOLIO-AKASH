@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#1645EA"/><stop offset="1" stop-color="#092BB5"/></linearGradient>
+    <linearGradient id="disc" x1="682" y1="117" x2="1070" y2="615" gradientUnits="userSpaceOnUse"><stop stop-color="#CBF93E"/><stop offset="1" stop-color="#B3E725"/></linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="900" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#05238C" flood-opacity=".35"/></filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v800H0z"/>
+  <g stroke="#7D99FF" stroke-opacity=".18"><circle cx="1080" cy="151" r="244"/><circle cx="1080" cy="151" r="280"/><circle cx="1080" cy="151" r="316"/><path d="M-88 640c210-162 274 220 528 62s370 109 575-15 240-106 309-38M-88 664c210-162 274 220 528 62s370 109 575-15 240-106 309-38M-88 688c210-162 274 220 528 62s370 109 575-15 240-106 309-38"/></g>
+  <g filter="url(#shadow)">
+    <rect x="80" y="73" width="1040" height="654" rx="25" fill="#1034C0" stroke="#5273F2"/>
+    <path d="M80 147h1040" stroke="#4565DC"/>
+    <g fill="#D8FF48"><rect x="111" y="103" width="4" height="15" rx="2"/><rect x="119" y="98" width="4" height="25" rx="2"/><rect x="127" y="105" width="4" height="11" rx="2"/><rect x="135" y="100" width="4" height="21" rx="2"/></g>
+    <text x="150" y="118" fill="#F0F4FF" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="-.6">motionbeatz</text>
+    <text x="717" y="115" fill="#D2DAFF" font-family="Arial,sans-serif" font-size="11">Playground</text><text x="831" y="115" fill="#8CA7FF" font-family="Arial,sans-serif" font-size="11">Your collection</text>
+    <rect x="970" y="95" width="119" height="31" rx="15.5" stroke="#7D97EF"/><circle cx="987" cy="110.5" r="3.5" fill="#D8FF48"/><text x="997" y="115" fill="#D5DFFF" font-family="Arial,sans-serif" font-size="9" letter-spacing=".7">GESTURE ON</text>
+    <text x="126" y="207" fill="#AFC0FF" font-family="Arial,sans-serif" font-size="10" letter-spacing="2.6">SOUND IN MOTION</text>
+    <text x="120" y="279" fill="#F4F6FF" font-family="Arial,sans-serif" font-size="62" font-weight="700" letter-spacing="-3">Feel the beat.</text>
+    <text x="120" y="345" fill="#D8FF48" font-family="Arial,sans-serif" font-size="62" font-weight="700" letter-spacing="-3">Move the music.</text>
+    <text x="125" y="380" fill="#A8BCFF" font-family="Arial,sans-serif" font-size="12">A new way to play. All in your hands.</text>
+    <rect x="124" y="414" width="141" height="40" rx="20" fill="#D8FF48"/><path d="m145 427 10 7-10 7Z" fill="#1738BC"/><text x="169" y="439" fill="#1738BC" font-family="Arial,sans-serif" font-size="11" font-weight="600">Get in the flow</text>
+    <circle cx="862" cy="371" r="188" fill="url(#disc)"/>
+    <g stroke="#739F18" stroke-opacity=".23"><circle cx="862" cy="371" r="173"/><circle cx="862" cy="371" r="158"/><circle cx="862" cy="371" r="143"/></g>
+    <circle cx="862" cy="371" r="9" fill="#1034C0" opacity=".12"/>
+    <path d="M809 535c-21-28-49-61-61-88-8-18 1-32 13-32 13 0 23 20 35 29l-25-115c-6-24 20-32 27-10l20 74-13-145c-2-27 25-29 28-3l16 137 1-174c0-25 27-27 28 0l6 170 18-136c3-24 29-20 26 5l-12 139c33-34 52-46 68-34 10 8 6 18-5 32l-48 67c-10 47-26 67-51 92l-7 40-88-4Z" fill="#1643DC" stroke="#1234B4" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M817 393c3 15 7 22 10 26m22-37 3 28m33-32-3 31m-64 37c18-12 54-9 65 8m-81-8c16 18 26 35 26 53m48-40c-12 17-14 34-12 51" stroke="#8CA9FF" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="m781 569 95 4-4 35-88-1Z" fill="#0C2DAD" stroke="#8CA9FF" stroke-width="2"/>
+    <circle cx="760" cy="287" r="8" fill="#E8FCA8"/><path d="m729 306-20-10m25-13-10-20m-3 62-23 1" stroke="#ECFFC0" stroke-width="3" stroke-linecap="round"/>
+    <path d="m1000 322 17-9m-12 29 20 2m-37-43 7-17" stroke="#ECFFC0" stroke-width="3" stroke-linecap="round"/>
+    <rect x="125" y="510" width="474" height="159" rx="18" fill="#082BA8" stroke="#4C6AE2"/>
+    <rect x="143" y="529" width="64" height="64" rx="10" fill="#D8FF48"/>
+    <path d="M152 552c14-24 24 35 46 5m-46 5c14-24 24 35 46 5m-46 5c14-24 24 35 46 5" stroke="#1741C6" stroke-width="2"/>
+    <text x="222" y="552" fill="#F0F4FF" font-family="Arial,sans-serif" font-size="16" font-weight="600">Electric daydream</text><text x="222" y="574" fill="#8CA7F3" font-family="Arial,sans-serif" font-size="10">THE CURRENT · MOTION MIX</text>
+    <circle cx="555" cy="551" r="16" fill="#2145C0"/><path d="M551 545v12m7-12v12" stroke="#D8FF48" stroke-width="2.5" stroke-linecap="round"/>
+    <g stroke="#93ADFF" stroke-width="3" stroke-linecap="round"><path d="M146 628v4m8-9v14m8-20v26m8-23v20m8-10v0m8-6v12m8-20v28m8-23v18m8-34v48m8-43v38m8-25v12m8-23v34m8-28v22m8-42v62m8-49v36m8-24v10m8-18v26m8-33v40m8-27v14m8-19v24m8-39v54m8-35v16m8-22v28m8-34v40m8-31v22m8-14v6m8-19v32m8-25v18m8-31v44m8-36v28m8-19v10m8-24v38m8-27v16m8-33v50m8-38v26m8-18v10m8-23v36m8-28v20m8-13v6m8-17v28m8-23v18m8-31v44m8-33v22m8-14v6m8-18v30m8-22v14m8-9v4m8-13v22m8-17v12m8-8v4m8-12v20m8-14v8m8-6v4m8-9v14"/></g>
+    <path d="M346 607v45" stroke="#D8FF48" stroke-width="2"/><circle cx="346" cy="608" r="4" fill="#D8FF48"/>
+    <text x="125" y="697" fill="#829DED" font-family="Arial,sans-serif" font-size="9" letter-spacing="1.1">RAISE YOUR HAND. FIND YOUR RHYTHM.</text>
+    <rect x="953" y="589" width="127" height="38" rx="19" fill="#1E49D5" stroke="#587BE6"/><path d="m974 607 5 5 9-10" stroke="#D8FF48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="998" y="613" fill="#DCE6FF" font-family="Arial,sans-serif" font-size="10">Connected</text>
+    <g fill="#B2C3FE"><circle cx="1017" cy="674" r="3"/><circle cx="1033" cy="674" r="3" opacity=".4"/><circle cx="1049" cy="674" r="3" opacity=".4"/></g>
+  </g>
+</svg>

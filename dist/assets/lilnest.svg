@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#F4DED4"/><stop offset="1" stop-color="#E8DFF1"/></linearGradient>
+    <linearGradient id="petal" x1="365" y1="331" x2="584" y2="556" gradientUnits="userSpaceOnUse"><stop stop-color="#ECA58E"/><stop offset="1" stop-color="#D98775"/></linearGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="850" filterUnits="userSpaceOnUse"><feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#856B7A" flood-opacity=".16"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="50"/></filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v800H0z"/>
+  <circle cx="70" cy="700" r="220" fill="#F5B8A5" opacity=".4" filter="url(#soft)"/><circle cx="1120" cy="80" r="240" fill="#D5C1EA" opacity=".5" filter="url(#soft)"/>
+  <path d="M-62 177C150-2 339 4 434-89M831 891c20-191 260-258 419-194" stroke="#FFF5EC" stroke-width="2" opacity=".55"/>
+  <g filter="url(#shadow)">
+    <rect x="82" y="74" width="1036" height="652" rx="24" fill="#FFFDF9"/>
+    <path d="M82 148h1036" stroke="#EAE4DD"/>
+    <g fill="#AA879F"><ellipse cx="122" cy="108" rx="5" ry="10"/><ellipse cx="122" cy="108" rx="5" ry="10" transform="rotate(60 122 108)"/><ellipse cx="122" cy="108" rx="5" ry="10" transform="rotate(120 122 108)"/><circle cx="122" cy="108" r="3" fill="#FFF5D6"/></g>
+    <text x="140" y="117" fill="#564852" font-family="Georgia,serif" font-size="29" letter-spacing="-1">lilnest</text>
+    <text x="406" y="113" fill="#A17B91" font-family="Arial,sans-serif" font-size="12" font-weight="600">Your space</text><text x="522" y="113" fill="#8D8789" font-family="Arial,sans-serif" font-size="12">Explore</text><text x="618" y="113" fill="#8D8789" font-family="Arial,sans-serif" font-size="12">Journal</text>
+    <path d="M406 147h64" stroke="#AE87A2" stroke-width="2"/>
+    <circle cx="1067" cy="110" r="19" fill="#E9DCEB"/><path d="M1054 121c3-10 23-10 26 0" fill="#AD8FAF"/><circle cx="1067" cy="106" r="6" fill="#AD8FAF"/>
+    <text x="125" y="200" fill="#A18D98" font-family="Arial,sans-serif" font-size="10" letter-spacing="2">A SPACE TO BLOOM</text>
+    <text x="123" y="254" fill="#57424C" font-family="Georgia,serif" font-size="45" letter-spacing="-1">A little care,</text>
+    <text x="123" y="306" fill="#57424C" font-family="Georgia,serif" font-size="45" letter-spacing="-1">every day.</text>
+    <text x="126" y="341" fill="#9B8B90" font-family="Arial,sans-serif" font-size="12">Make room for yourself and the moments that matter.</text>
+    <rect x="125" y="365" width="149" height="37" rx="18.5" fill="#9F7E99"/><text x="146" y="388" fill="#FFFAF9" font-family="Arial,sans-serif" font-size="11">Begin your day</text><path d="m249 380 4 4-4 4m-5-4h9" stroke="#FFFAF9" stroke-width="1.2"/>
+    <path d="M127 572c-6-62 58-107 103-93 25-70 125-85 176-38 70-31 133 15 133 76 53 31 46 117-7 140H165c-37-12-51-52-38-85Z" fill="#FAE8DF"/>
+    <ellipse cx="330" cy="655" rx="203" ry="15" fill="#E9CABD" opacity=".25"/>
+    <path d="M329 637c-53-45-87-121-49-165 30-35 69-29 86-13 25-25 61-20 77 10 29 56-32 132-114 168Z" fill="url(#petal)"/>
+    <path d="M329 637c-4-59 6-106 38-159" stroke="#B66D60" stroke-width="1.5"/>
+    <path d="M332 629c-8-49-44-68-69-62 5 36 35 58 69 62Z" fill="#AEBA9F"/>
+    <path d="M329 624c29-47 62-61 88-51-12 31-46 50-88 51Z" fill="#8EAA93"/>
+    <path d="M329 626c-33-32-55-42-66-48m69 45c31-26 54-38 75-43" stroke="#6E8C77" stroke-width="1.2"/>
+    <path d="M209 636c-4-41-19-73-38-100m31 76c-29-5-43-22-39-45 20 2 39 21 39 45Zm-9-30c5-28 19-42 40-41-2 18-18 34-40 41Z" stroke="#A8B19C" stroke-width="1.3"/>
+    <path d="M466 639c10-45 28-75 57-96m-41 51c-2-28 8-48 29-54 6 23-8 43-29 54Zm-8 26c24-19 46-20 61-6-18 16-38 16-61 6Z" stroke="#A8B19C" stroke-width="1.3"/>
+    <circle cx="232" cy="449" r="6" fill="#DFBF85"/><path d="m232 435 0 4m0 20v4m14-14h-4m-20 0h-4" stroke="#DFBF85" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="m453 408 4 9 10 2-8 7 1 10-9-5-9 4 2-10-6-7 10-1Z" fill="#D3B6CC"/>
+    <path d="M596 182v505" stroke="#EEE6E1"/>
+    <rect x="627" y="183" width="448" height="239" rx="18" fill="#F0E9F3"/>
+    <text x="653" y="219" fill="#6B5267" font-family="Georgia,serif" font-size="24">Growing together</text><text x="653" y="244" fill="#9A8397" font-family="Arial,sans-serif" font-size="11">Your journey, one gentle step at a time.</text>
+    <path d="M706 358a76 76 0 0 1 152 0" stroke="#DED0E3" stroke-width="10" stroke-linecap="round"/>
+    <path d="M706 358a76 76 0 0 1 116-65" stroke="#AE8BA7" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="782" cy="325" r="21" fill="#FFF9F1"/>
+    <path d="M776 327c-13-11-2-20 6-10 8-10 19-1 6 10l-6 5Z" fill="#D6ADA0"/>
+    <text x="752" y="371" fill="#806079" font-family="Arial,sans-serif" font-size="11">THIS WEEK</text>
+    <rect x="903" y="280" width="144" height="113" rx="13" fill="#FBF8FC"/>
+    <g stroke="#AD94B3" stroke-width="1.3"><rect x="956" y="299" width="33" height="30" rx="5"/><path d="M956 309h33m-24-13v6m15-6v6m-16 13h3m5 0h3m5 0h3m-19 6h3m5 0h3"/></g>
+    <text x="930" y="351" fill="#7F657B" font-family="Arial,sans-serif" font-size="11">A moment for you</text><text x="941" y="371" fill="#B19AAE" font-family="Arial,sans-serif" font-size="9">Make some space</text>
+    <text x="629" y="466" fill="#6C5563" font-family="Georgia,serif" font-size="24">Your daily rituals</text><text x="1032" y="465" fill="#A58D9F" font-family="Arial,sans-serif" font-size="10">View all</text>
+    <rect x="628" y="488" width="215" height="174" rx="16" fill="#F8EDE3"/>
+    <rect x="859" y="488" width="215" height="174" rx="16" fill="#EEF0E8"/>
+    <circle cx="735" cy="545" r="28" fill="#F0D6BD"/><path d="M726 554c-13-13-13-20 0-28m18 28c13-13 13-20 0-28m-9-4v36" stroke="#B88C69" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="648" y="608" fill="#8A6854" font-family="Arial,sans-serif" font-size="13">A mindful pause</text><text x="648" y="632" fill="#BA9D88" font-family="Arial,sans-serif" font-size="10">Breathe. Reset. Begin again.</text>
+    <path d="M969 570v-41m0 27c-16-1-24-10-23-24 14 0 23 9 23 24Zm0-12c0-16 9-24 24-23 0 14-9 22-24 23Z" stroke="#90A18A" stroke-width="1.7"/>
+    <text x="879" y="608" fill="#6D7F66" font-family="Arial,sans-serif" font-size="13">Little reflections</text><text x="879" y="632" fill="#A0AC99" font-family="Arial,sans-serif" font-size="10">Save something beautiful.</text>
+  </g>
+</svg>
