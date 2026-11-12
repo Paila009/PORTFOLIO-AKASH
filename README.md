@@ -80,8 +80,10 @@ Contact uses email and supplied GitHub, LinkedIn, Instagram links. The paper is 
 
 The original `dist/assets/chrome-sculpture.png` was created with built-in imagegen. Prompt: “Premium studio render of a polished liquid-chrome ribbon knot with one acid-lime sphere, three-quarter view, isolated transparent background, no text or logos.” This is site decoration. Project SVGs are interface concepts. Gallery placeholder SVGs are clearly labeled development assets.
 
-The camera portrait on the homepage and the seated portrait on About are supplied by Akash. The site uses responsive WebP copies with image metadata removed. `crimson-sculpture.png` and its WebP variants are retained assets from the earlier version of the hero.
+The camera portrait on the homepage and the seated portrait on About are supplied by Akash. The site uses responsive WebP copies with image metadata removed. The homepage cutout was prepared with built-in ImageGen using a background-only edit: “Replace the white backdrop with transparency; preserve the pose, camera, clothes, grayscale lighting, and framing.” `crimson-sculpture.png` and its WebP variants are retained assets from the earlier version of the hero.
 
 ## Motion
 
 Scrolling stays native. The hero has scroll-driven translation, scale, and 3D rotation; its orbit field uses perspective projection. Opposing typography bands slide with scroll, section reveals stagger into view, and cards combine scroll depth with pointer tilt. Touch devices use gentler effects and no hover tilt. The footer Motion control and system reduced-motion setting disable the effects. Content remains visible without JavaScript. Rendering pauses when the page is hidden and the orbit field is offscreen.
+
+The homepage's Builder Tour (`dist/builder-tour.js` and `dist/builder-tour.css`) is a scripted visual walkthrough. Labeled cursors highlight page elements as the viewport glides between sections. The tour plays once per browser tab on a fresh visit at the top of the homepage, and its header button stops or replays it. Normal scrolling, touch, and keyboard navigation take priority, and the tour follows reduced-motion preferences.
