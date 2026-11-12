@@ -1,4 +1,4 @@
-/* Choreographed cursors and a scroll tour; no content is edited by the animation. */
+/* Draw the actual page in place, preserving layout and native navigation. */
 (() => {
   'use strict';
   const button = document.querySelector('[data-builder-tour]');
@@ -10,27 +10,34 @@
   const header = button.closest('header');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const compact = window.matchMedia('(max-width: 760px)');
-  const sessionKey = 'akash-builder-tour-seen-v1';
+  const sessionKey = 'akash-builder-tour-seen-v2';
   const crew = [
     ['TYPE', '#ff6a86'], ['FRAME', '#c7abff'], ['GRID', '#f6c579'],
     ['SIGNAL', '#8ad4e1'], ['CODE', '#f3ebe7'], ['LENS', '#9be2bd'],
   ];
+  const heading = [['.edition-heading > div > span','type'],['.edition-heading h2','type'],['.edition-heading > a','type']];
   const chapters = [
-    ['Introduction', '.cover', [['#cover-name', 'type'], ['.hero-portrait', 'frame'], ['.cover-note', 'align'], ['.cover-billboard', 'place'], ['.hero-actions', 'link'], ['.cover-facts', 'check']]],
-    ['Two perspectives', '#ways', [['#ways-title', 'type'], ['#ways .way-card:first-child', 'box'], ['#ways .way-card:last-child', 'align']]],
-    ['Selected projects', '#work', [['#selected-title', 'type'], ['#work .selected-image', 'frame'], ['#work .selected-card:nth-child(2)', 'box'], ['#work .selected-card:nth-child(3)', 'align'], ['.toolkit-strip', 'check']]],
-    ['Project lab', '#lab', [['#lab-title', 'type'], ['.lab-input', 'trace'], ['.lab-output', 'frame'], ['.lab-control', 'check']]],
-    ['The journey', '#journey', [['#journey-title', 'type'], ['.journey-entry', 'check'], ['.journey-notes article', 'box']]],
-    ['Creative work', '#creative', [['#creative-title', 'type'], ['.canvas-tile', 'frame'], ['.camera-tile', 'focus'], ['.creative-edit-copy', 'align']]],
-    ['Get in touch', '#contact', [['#contact-title', 'type'], ['.edition-contact-row .edition-button', 'link'], ['.edition-socials', 'check']]],
+    ['Introduction', '.cover', [
+      ['.site-header nav a, .site-header .contact-link','type',true],
+      ['.cover-topline > *','type'], ['.cover-billboard','type'], ['.handwritten','type'], ['#cover-name','type'],
+      ['.cover-visual','media'], ['.cover-role','type'], ['.cover-description','type'],
+      ['.cover-note','box'], ['.cover-facts','box'], ['.hero-actions','box'], ['.depth-field','media'], ['.cover-bottom','box'],
+    ]],
+    ['Two perspectives', '#ways', [...heading,['.way-card','box']]],
+    ['Selected projects', '#work', [...heading,['.selected-card','box'],['.toolkit-strip','box']]],
+    ['Project lab', '#lab', [...heading,['.lab-intro','type'],['.lab-comparison','box']]],
+    ['The journey', '#journey', [...heading,['.journey-list','box'],['.journey-notes article','box']]],
+    ['Creative work', '#creative', [...heading,['.kinetic-band','box',true],['.creative-edit-copy','type'],['.tile-motion-wrap','media']]],
+    ['Get in touch', '#contact', [...heading,['.edition-contact-row > div:first-child','box'],['.edition-socials','box'],['.site-footer','box',true]]],
   ].map(([name, selector, items]) => {
     const section = document.querySelector(selector);
     return {
       name, section, anchor: section?.querySelector('.edition-heading') || section,
-      items: items.map(([target, action]) => ({node: document.querySelector(target), action})).filter(item => item.node),
+      items: items.flatMap(([target, kind, outside]) => [...(outside ? document : section)?.querySelectorAll(target) || []].map(node => ({node,kind,header:header?.contains(node)}))),
     };
   }).filter(chapter => chapter.section && chapter.items.length);
-  if (chapters.length < 2) return;
+  if (chapters.length < 2) { root.classList.remove('builder-tour-preparing'); return; }
+  const tasks=chapters.flatMap(chapter=>chapter.items);
 
   const cursorSvg = '<svg viewBox="0 0 22 24" focusable="false"><path d="M2 2.1 19.6 12l-7.4 1.1-3.8 7.2z" fill="currentColor" stroke="#0a0608" stroke-width="1.25" stroke-linejoin="round"/></svg>';
   const overlay = document.createElement('div');
@@ -42,7 +49,7 @@
   const hud = overlay.querySelector('.builder-hud-text');
   const bar = overlay.querySelector('.builder-hud-track b');
   const agents = [...overlay.querySelectorAll('.builder-cursor')].map((node,i) => ({
-    node, action: node.querySelector('.builder-chip span'), x:0, y:0, fromX:0, fromY:0, beat:-1, began:0, phase:i*133,
+    node, action: node.querySelector('.builder-chip span'), x:0, y:0, fromX:0, fromY:0, began:0, task:null, phase:i*133,
   }));
   const boxes = [...overlay.querySelectorAll('.builder-box')].map(node => ({node, label:node.querySelector('span')}));
   document.body.append(overlay);
@@ -77,11 +84,23 @@
   }
 
   function stop() {
+    root.classList.remove('builder-tour-preparing');
     if (!pending && !run) return;
     if (pending) window.clearTimeout(pending);
     pending = 0;
     if (frame) window.cancelAnimationFrame(frame);
     frame = 0;
+    if (run) {
+      for(const {node} of tasks) {
+        delete node.dataset.buildState;
+        delete node.dataset.buildKind;
+        node.style.removeProperty('--build-progress');
+      }
+      for(const node of document.querySelectorAll('.motion-reveal.is-pending')) {
+        node.classList.remove('is-pending');
+        node.classList.add('is-revealed');
+      }
+    }
     run = null;
     overlay.hidden = true;
     root.classList.remove('builder-tour-running');
@@ -89,119 +108,160 @@
     reflect();
   }
 
+  const layoutTop=node=>{
+    let top=0;
+    for(let el=node;el;el=el.offsetParent)top+=el.offsetTop;
+    return top;
+  };
   function start() {
-    if (blocked() || document.hidden || run) return;
+    if (blocked() || document.hidden || run) { root.classList.remove('builder-tour-preparing'); return; }
     if (pending) window.clearTimeout(pending);
     pending = 0;
     remember();
+    for(const task of tasks) {
+      task.state='waiting';
+      task.node.dataset.buildKind=task.kind;
+      task.node.dataset.buildState='waiting';
+      task.node.style.setProperty('--build-progress','0%');
+    }
+    root.classList.add('builder-tour-running');
+    root.classList.remove('builder-tour-preparing');
     jump(0);
     const headerHeight = header?.offsetHeight || 70;
     const maxScroll = Math.max(0,root.scrollHeight - window.innerHeight);
-    let time = 3800;
-    const scenes = chapters.map((chapter,index) => {
-      if (index === 0) return {...chapter, from:0, to:0, begin:0, travel:0, end:time};
-      const to = clamp(chapter.anchor.getBoundingClientRect().top + window.scrollY - headerHeight - 27,0,maxScroll);
-      const scene = {...chapter, from:0, to, begin:time, travel:0, end:0};
-      return scene;
+    let time=0;
+    const scenes=chapters.map((chapter,index)=>{
+      const from=index ? chapters[index-1].position : 0;
+      const to=index ? clamp(layoutTop(chapter.anchor)-headerHeight-27,0,maxScroll) : 0;
+      chapter.position=to;
+      const travel=index ? clamp(Math.abs(to-from)*3.7,2450,4320) : 0;
+      const begin=time;
+      time+=index ? travel+2020 : 5850;
+      chapter.items.forEach((task,taskIndex)=>{
+        task.ready=begin+(index ? travel*.83+180+taskIndex*190 : 425+taskIndex*205);
+      });
+      return {...chapter,from,to,begin,travel,end:time};
     });
-    for (let index=1;index<scenes.length;index++) {
-      const scene = scenes[index];
-      scene.from = scenes[index-1].to;
-      scene.begin = time;
-      scene.travel = clamp(Math.abs(scene.to-scene.from)*5,2950,6600);
-      time += scene.travel + (index === scenes.length-1 ? 1550 : 950);
-      scene.end = time;
-    }
-    run = {scenes, time, started:performance.now(), index:-1, width:root.clientWidth, top:0};
-    agents.forEach((agent,index) => {
-      agent.x = run.width * [.12,.59,.82,.28,.73,.42][index];
-      agent.y = window.innerHeight * [.45,.68,.36,.83,.78,.32][index];
-      agent.beat = -1;
+    run = {scenes,time,started:performance.now(),index:-1,width:root.clientWidth,top:0};
+    agents.forEach((agent,index)=>{
+      agent.x=run.width*[.12,.59,.82,.28,.73,.42][index];
+      agent.y=window.innerHeight*[.45,.68,.36,.83,.78,.32][index];
+      agent.task=null;
     });
-    overlay.style.setProperty('--builder-header',`${headerHeight}px`);
-    const inset = chapters[0].section.getBoundingClientRect().left + parseFloat(getComputedStyle(chapters[0].section).paddingLeft);
-    overlay.style.setProperty('--builder-inset',`${Math.max(14,inset)}px`);
-    root.classList.add('builder-tour-running');
+    overlay.style.setProperty('--builder-header',headerHeight+'px');
+    const inset=chapters[0].section.getBoundingClientRect().left+parseFloat(getComputedStyle(chapters[0].section).paddingLeft);
+    overlay.style.setProperty('--builder-inset',Math.max(14,inset)+'px');
     reflect();
     paint(performance.now());
   }
 
-  function sceneTargets(scene, fallback, bounds) {
-    const visible = scene.items.map(item => {
-      const rect = item.node.getBoundingClientRect();
-      return {
-        action:item.action, fullWidth:rect.width, fullHeight:rect.height,
-        left:Math.max(8,rect.left-4), right:Math.min(bounds.width-8,rect.right+4),
-        top:Math.max(bounds.top,rect.top-4), bottom:Math.min(bounds.height-21,rect.bottom+4),
-      };
-    }).filter(item => item.right-item.left>21 && item.bottom-item.top>22);
-    return visible.length || !fallback ? visible : sceneTargets(fallback,null,bounds);
+  function targetRect(task,bounds) {
+    const rect=task.node.getBoundingClientRect();
+    const result={
+      width:rect.width,height:rect.height,
+      left:Math.max(8,rect.left-3),right:Math.min(bounds.width-8,rect.right+3),
+      top:Math.max(task.header?8:bounds.top,rect.top-3),bottom:Math.min(bounds.height-21,rect.bottom+3),
+    };
+    return result.right-result.left>15 && result.bottom-result.top>12 ? result : null;
+  }
+  function finishTask(task) {
+    task.state='done';
+    task.node.dataset.buildState='done';
+    task.node.style.setProperty('--build-progress','100%');
   }
 
   function paint(now) {
     if (!run) return;
-    const elapsed = now-run.started;
-    if (elapsed >= run.time) { stop(); return; }
-    const index = run.scenes.findIndex(scene => elapsed < scene.end);
-    const scene = run.scenes[index];
-    const local = elapsed-scene.begin;
-    const amount = scene.travel ? easing(clamp(local/scene.travel,0,1)) : 1;
-    const top = Math.round(scene.from+(scene.to-scene.from)*amount);
+    const elapsed=now-run.started;
+    if (elapsed>=run.time) { stop(); return; }
+    const index=run.scenes.findIndex(scene=>elapsed<scene.end);
+    const scene=run.scenes[index];
+    const local=elapsed-scene.begin;
+    const amount=scene.travel ? easing(clamp(local/scene.travel,0,1)) : 1;
+    const top=Math.round(scene.from+(scene.to-scene.from)*amount);
+    run.top=top;
     if (Math.abs(top-window.scrollY)>1) jump(top);
-    run.top = top;
-    const bounds = {width:root.clientWidth,height:window.innerHeight,top:(header?.offsetHeight||70)+17};
-    const targets = sceneTargets(scene,run.scenes[index-1],bounds);
-    const beat = Math.floor(local/1510);
-    const count = compact.matches ? 3 : agents.length;
-    const appear = clamp(elapsed/480,0,1)*clamp((run.time-elapsed)/500,0,1);
+    const bounds={width:root.clientWidth,height:window.innerHeight,top:(header?.offsetHeight||70)+14};
+    const count=compact.matches ? 3 : agents.length;
 
-    if (run.index !== index) {
-      run.index = index;
-      hud.textContent = `${String(index+1).padStart(2,'0')} / ${scene.name}`;
-      overlay.dataset.chapter = String(index);
-      agents.forEach(agent => { agent.beat=-1; });
+    if(run.index!==index){
+      run.index=index;
+      hud.textContent=String(index+1).padStart(2,'0')+' / '+scene.name;
+      overlay.dataset.chapter=String(index);
     }
 
-    for (let i=0;i<count;i++) {
+    // Keep the target blank while an agent travels to it. Only that agent can reveal it.
+    const candidates=[];
+    for(const task of tasks) {
+      if(task.state!=='waiting' || task.ready>elapsed)continue;
+      const rect=targetRect(task,bounds);
+      if(rect)candidates.push({task,rect});
+    }
+    const drawings=[];
+    for(let i=0;i<count;i++){
       const agent=agents[i];
-      const target=targets[(i+beat)%targets.length];
-      if (agent.beat !== beat) {
-        agent.beat=beat;
+      if(!agent.task && candidates.length){
+        const target=candidates.shift();
+        agent.task=target.task;
+        agent.task.state='assigned';
         agent.began=now;
         agent.fromX=agent.x;
         agent.fromY=agent.y;
       }
-      const pace=clamp((now-agent.began-agent.phase)/(690+i*45),0,1);
-      const shift=easing(pace);
-      const corner=(i+beat)%4;
-      const chipWidth=compact.matches?87:112;
-      const endX=clamp(target ? (corner%2===0 ? target.left+3 : target.right-6) : bounds.width*(.15+i*.13),12,bounds.width-chipWidth);
-      const endY=clamp(target ? (corner<2 ? target.top-9 : target.bottom-9) : bounds.height*(.32+i*.082),bounds.top,bounds.height-62);
-      const curve=Math.sin(pace*Math.PI)*(i%2===0?-1:1)*(19+i*4);
-      agent.x=agent.fromX+(endX-agent.fromX)*shift+curve*.65;
-      agent.y=agent.fromY+(endY-agent.fromY)*shift+curve;
-      agent.node.style.transform=`translate3d(${Math.round(agent.x)}px,${Math.round(agent.y)}px,0)`;
-      const action=target?.action || 'scan';
-      if (agent.action.textContent !== action) agent.action.textContent=action;
-      const click=pace>.96 && now-agent.began-agent.phase < 1120;
-      agent.node.classList.toggle('builder-click',click);
+      const task=agent.task;
+      const rect=task ? targetRect(task,bounds) : null;
+      const age=now-agent.began;
+      const flight=340+i*19;
+      const draw=task?.kind==='type' ? 610 : 780;
+      const progress=clamp((age-flight)/draw,0,1);
+      const shape=task?.kind==='type' ? Math.floor(progress*27)/27 : easing(progress);
+      if(task && age>=flight){
+        if(task.state!=='drawing'){task.state='drawing';task.node.dataset.buildState='drawing';}
+        task.node.style.setProperty('--build-progress',(shape*100).toFixed(2)+'%');
+      }
+      if(task && rect){
+        const sweepX=task.kind==='type'||task.kind==='box' ? shape : 0.62;
+        const sweepY=task.kind==='type' ? .69 : shape;
+        const endX=clamp(rect.left+(rect.right-rect.left)*sweepX,10,bounds.width-88);
+        const endY=clamp(rect.top+(rect.bottom-rect.top)*sweepY,8,bounds.height-48);
+        const fraction=easing(clamp(age/flight,0,1));
+        const arc=Math.sin(fraction*Math.PI)*(i%2===0?-19:19);
+        agent.x=agent.fromX+(endX-agent.fromX)*fraction+arc;
+        agent.y=agent.fromY+(endY-agent.fromY)*fraction+arc*.6;
+        if(task.kind!=='type'&&age>=flight)drawings.push({rect,shape,kind:task.kind,ink:crew[i][1]});
+      } else {
+        const seconds=elapsed/1000;
+        const idleX=clamp(bounds.width*[.16,.57,.8,.33,.76,.45][i]+Math.sin(seconds*1.8+i)*38,10,bounds.width-90);
+        const idleY=clamp(bounds.height*[.37,.59,.35,.74,.75,.27][i]+Math.cos(seconds*1.7+i)*32,bounds.top,bounds.height-58);
+        agent.x+=(idleX-agent.x)*.055;
+        agent.y+=(idleY-agent.y)*.055;
+      }
+      agent.node.style.transform='translate3d('+Math.round(agent.x)+'px,'+Math.round(agent.y)+'px,0)';
+      const action=task ? ({type:'type',media:'place',box:'box'})[task.kind] : 'scan';
+      if(agent.action.textContent!==action)agent.action.textContent=action;
+      agent.node.classList.toggle('builder-typing',!!rect && task.kind==='type' && age>=flight && progress<1);
+      agent.node.classList.toggle('builder-click',!!rect && progress>.82);
+      if(task && progress>=1){finishTask(task);agent.task=null;}
     }
 
-    const selectionCount=compact.matches?1:boxes.length;
-    boxes.forEach((box,i) => {
-      const target=i<selectionCount ? targets[(beat+i)%targets.length] : null;
-      if (!target) { box.node.hidden=true; return; }
+    boxes.forEach((box,i)=>{
+      const drawing=i<(compact.matches?1:boxes.length) ? drawings[i] : null;
+      if(!drawing){box.node.hidden=true;return;}
+      const {rect,shape,kind,ink}=drawing;
       box.node.hidden=false;
-      box.node.style.transform=`translate3d(${Math.round(target.left)}px,${Math.round(target.top)}px,0)`;
-      box.node.style.width=`${Math.round(target.right-target.left)}px`;
-      box.node.style.height=`${Math.round(target.bottom-target.top)}px`;
-      const dimensions=`${Math.round(target.fullWidth)} × ${Math.round(target.fullHeight)}`;
-      if(box.label.textContent!==dimensions) box.label.textContent=dimensions;
+      box.node.style.setProperty('--agent-ink',ink);
+      box.node.style.transform='translate3d('+Math.round(rect.left)+'px,'+Math.round(rect.top)+'px,0)';
+      const width=Math.max(1,Math.round((rect.right-rect.left)*shape));
+      const height=Math.max(1,Math.round((rect.bottom-rect.top)*shape));
+      box.node.style.width=width+'px';
+      box.node.style.height=height+'px';
+      const dimensions=width+' × '+height;
+      if(box.label.textContent!==dimensions)box.label.textContent=dimensions;
     });
 
-    overlay.style.opacity=String(appear);
+    overlay.style.opacity=String(clamp(elapsed/240,0,1)*clamp((run.time-elapsed)/500,0,1));
     overlay.hidden=false;
-    bar.style.transform=`scaleX(${elapsed/run.time})`;
+    bar.style.transform='scaleX('+(elapsed/run.time)+')';
     frame=window.requestAnimationFrame(paint);
   }
 
@@ -238,6 +298,7 @@
     pending=window.setTimeout(() => {
       pending=0;
       if (!window.location.hash && window.scrollY<6 && !document.hidden && !blocked()) start();
-    },950);
-  }
+      else root.classList.remove('builder-tour-preparing');
+    },290);
+  } else root.classList.remove('builder-tour-preparing');
 })();
