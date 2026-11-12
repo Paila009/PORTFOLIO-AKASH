@@ -11,7 +11,7 @@ Routes: `/`, `/code/`, `/code/signal-lab/`, `/code/lilnest/`, `/code/motionbeatz
 - `content/`: editable profile, projects, artwork, and photography.
 - `lib/home.mjs`: active homepage structure.
 - `templates/home.html`: retained previous homepage template.
-- `dist/editorial.css`: reference-inspired homepage composition.
+- `dist/editorial.css` and `dist/portrait-edition.css`: homepage composition, portraits, journey, and project lab.
 - `dist/dark.css`: shared black/crimson colors and typography.
 - `dist/motion.js` and `motion.css`: scroll parallax, section reveals, sliding type bands, pointer tilt, and reading progress.
 - `dist/orbit-field.js`: a dependency-free decorative canvas with perspective-projected 3D rings.
@@ -69,7 +69,7 @@ node build.mjs
 
 ## Content still needed
 
-- Original artwork and photographs; gallery entries are explicitly labeled development placeholders.
+- Original artwork and photographs; the public gallery pages are ready for the first entries.
 - Artwork medium/year and photo stories, locations, and dates, when supplied.
 - Actual project screenshots; current illustrations are labeled interface concepts.
 - Detailed project challenges and lessons learned. Missing source/demo links are omitted.
@@ -80,7 +80,7 @@ Contact uses email and supplied GitHub, LinkedIn, Instagram links. The paper is 
 
 The original `dist/assets/chrome-sculpture.png` was created with built-in imagegen. Prompt: “Premium studio render of a polished liquid-chrome ribbon knot with one acid-lime sphere, three-quarter view, isolated transparent background, no text or logos.” This is site decoration. Project SVGs are interface concepts. Gallery placeholder SVGs are clearly labeled development assets.
 
-The current `crimson-sculpture.png` is an imagegen edit of that decoration. Prompt: preserve the original sculpture geometry, silhouette, camera, and framing; replace the lime sphere and reflections with polished crimson, darker chrome, and silver highlights; transparent background; no people, text, logos, extra objects, or backgrounds. Responsive WebP variants at 480, 900, and 1254 pixels preserve transparency. No portrait of Akash has been supplied; the centerpiece is decorative, not a representation of him.
+The camera portrait on the homepage and the seated portrait on About are supplied by Akash. The site uses responsive WebP copies with image metadata removed. `crimson-sculpture.png` and its WebP variants are retained assets from the earlier version of the hero.
 
 ## Motion
 

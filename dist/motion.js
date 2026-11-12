@@ -19,11 +19,11 @@
   document.body.prepend(progressBar);
 
   const revealGroups = [
-    ['.editorial-heading, .page-intro > *, .case-intro > *, .gallery-intro-grid > *', 'left'],
+    ['.editorial-heading, .edition-heading, .page-intro > *, .case-intro > *, .gallery-intro-grid > *', 'left'],
     ['.selected-card, .code-card, .gallery-entry', 'cards'],
     ['.education-panel, .creative-edit-copy, .contact-lead, .about-page-statement', 'left'],
     ['.process-panel, .contact-directory, .about-page-bio', 'right'],
-    ['.process-list li, .skills-groups > div, .case-details article', 'up'],
+    ['.process-list li, .skills-groups > div, .case-details article, .way-card, .journey-entry, .journey-notes article', 'up'],
     ['.statement-panel, .tile-motion-wrap, .case-image', 'up'],
   ];
   const reveals = [];

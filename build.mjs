@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { layout, projectCard, escapeHtml as e } from './lib/layout.mjs';
 import { renderGallery } from './lib/galleries.mjs';
 import { renderHome } from './lib/home.mjs';
+import { renderAbout } from './lib/about.mjs';
 import { deploymentConfig, prefixHtml, prefixRootStrings } from './lib/paths.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -12,8 +13,7 @@ const [profile,projects,artwork,photography] = await Promise.all(['profile.json'
 const { basePath, siteUrl } = deploymentConfig();
 const routes = ['/','/code/','/art/','/photography/','/about/'];
 const writePage = async (route,html) => { const destination=path.join(root,'dist',route==='/'?'index.html':route.endsWith('.html')?route.slice(1):route.slice(1)+'index.html'); await mkdir(path.dirname(destination),{recursive:true}); await writeFile(destination,prefixHtml(html,basePath)); };
-const bio = profile.bio.map(paragraph=>`<p>${e(paragraph)}</p>`).join('');
-await writePage('/',renderHome({profile,projects,siteUrl}));
+await writePage('/',renderHome({profile,projects,siteUrl,artwork,photography}));
 
 const projectData={};
 projects.forEach((project,index)=>{const key=['signal','lilnest','motion'][index]||project.slug; projectData[key]={eyebrow:`0${index+1} / ${project.kicker}`,title:project.tagline||project.title,intro:project.summary,tags:project.technologies,sections:[['The project',project.problem],['My contribution',project.contribution],['The approach',project.approach]],links:[['Read the full project',`/code/${project.slug}/`],...(project.github?[['Explore the repository',project.github]]:[]),...(project.live?[['Visit the live project',project.live]]:[])]};});
@@ -30,7 +30,7 @@ for (const [kind,items] of [['art',artwork],['photography',photography]]) {
   const route=`/${kind}/`;
   await writePage(route,page({title:`${kind==='art'?'Art':'Photography'} — Paila Akash`,description:kind==='art'?"Akash's space for creative exploration, sketches, and art. Follow the visual diary on Instagram.":"A space for Akash's photography, observations, and visual stories. Follow @aakash.reddie.",path:route,active:kind,body:renderGallery({kind,items}),gallery:true}));
 }
-await writePage('/about/',page({title:'The person — Paila Akash',description:'Meet Paila Akash: Computer Science student, developer, artist, and photographer in Hyderabad.',path:'/about/',active:'about',body:`<section class="wrap page-intro about-page-intro"><span class="eyebrow">THE PERSON / CODE, CANVAS & CAMERA</span><h1>More than<br><em>one thing.</em></h1><p>${e(profile.role)}.<br>Based in ${e(profile.location)}.</p></section><section class="wrap about-page-grid"><div class="about-page-statement"><span aria-hidden="true">✳</span><h2>A little logic.<br>A little instinct.<br><em>Always curious.</em></h2></div><div class="about-page-bio">${bio}<h3>Learning, building, exploring.</h3><p>My technical interests include Generative AI, full-stack development, computer vision, and signal intelligence. I like exploring how these tools can address real problems and create more natural interactions.</p><div class="education-box"><span class="eyebrow">EDUCATION</span><h3>${e(profile.college)}</h3><p>${e(profile.degree)}<br>${e(profile.year)} · CGPA ${e(profile.cgpa)}</p></div><a class="button button-outline" href="${e(profile.resumePath)}" download>Download résumé ↓</a></div></section><section class="wrap about-contact section-space" id="contact"><span class="eyebrow">GOOD THINGS START WITH A CONVERSATION</span><h2>Let's make<br><em>something matter.</em></h2><a class="email-link" href="mailto:${e(profile.email)}">${e(profile.email)} ↗</a><p>A project, a collaboration, or just a hello.</p><div class="about-socials"><a href="${e(profile.github)}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="${e(profile.linkedin)}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${e(profile.instagram)}" target="_blank" rel="noopener noreferrer">Instagram / @aakash.reddie ↗</a></div></section>`}));
+await writePage('/about/',page({title:'The person — Paila Akash',description:'Meet Paila Akash, computer science student, artist, and photographer in Hyderabad.',path:'/about/',active:'about',body:renderAbout(profile)}));
 await writePage('/404.html',page({title:'Page not found — Paila Akash',description:'This page is missing. Find your way back to Akash’s portfolio.',path:'/404.html',body:'<section class="wrap page-intro not-found"><span class="eyebrow">404 / A LITTLE OFF THE MAP</span><h1>Lost in<br><em>the making.</em></h1><p>This page isn’t here. There’s plenty to explore back at the start.</p><a class="button button-dark" href="/">Back to the portfolio ↗</a></section>'}));
 await writeFile(path.join(root,'dist/sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map(route=>`<url><loc>${siteUrl}${route}</loc></url>`).join('')}</urlset>`);
 await writeFile(path.join(root,'dist/robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`);

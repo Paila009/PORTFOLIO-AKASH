@@ -14,3 +14,12 @@ function applyMotion(){document.documentElement.classList.toggle('motion-off',of
 applyMotion();
 motion.addEventListener('click',()=>{document.documentElement.classList.toggle('motion-override',off);off=!off;applyMotion();});
 reduce.addEventListener('change',event=>{off=event.matches;document.documentElement.classList.remove('motion-override');applyMotion();});
+
+document.querySelectorAll('[data-lab]').forEach(lab=>{
+  const control=lab.querySelector('.lab-control');
+  const range=control.querySelector('input');
+  const update=()=>{lab.style.setProperty('--lab-split',`${range.value}%`);range.setAttribute('aria-valuetext',`${100-Number(range.value)} percent playback interface`);};
+  range.addEventListener('input',update);
+  update();
+  control.hidden=false;
+});

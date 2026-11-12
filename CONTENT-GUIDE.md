@@ -4,7 +4,7 @@
 
 Edit `content/profile.json`. Keep valid JSON: double quotes, commas between properties, no trailing commas. `bio` is an array of paragraphs, `skills` maps group names to arrays, and social links are complete HTTPS URLs. `resumePath` points to a file inside `dist/`. Replace the existing résumé PDF at that path or change the path.
 
-The active homepage has editorial headings in `lib/home.mjs`; contact links, project previews, education year, and CGPA come from the content files. Its concise featured project titles are keyed by slug there. The original `templates/home.html` is retained for reference. Dedicated pages use shared layouts in `lib/layout.mjs`. If you change your current year, review the homepage fact labels too.
+The homepage and About page use `lib/home.mjs` and `lib/about.mjs`. The content files supply contact links, projects, journey entries, research, credentials, and education. The homepage uses each project's `label` for the card title when supplied. The original `templates/home.html` is retained for reference. Dedicated pages use shared layouts in `lib/layout.mjs`.
 
 ## Coding projects
 
@@ -14,7 +14,7 @@ Add the project illustration or screenshot under `dist/assets/` and use a root-r
 
 ## Art and photography
 
-Edit `content/artwork.json` or `content/photography.json`. Replace the development entries rather than leaving them mixed into your real collection. Match the provided field names. Set `placeholder` to `false`, point `src` to your own image, and add an honest title and description. Include medium/year for art and location/date for photography only when known. Omit missing metadata or use `null`.
+Both collections start empty. Put your images under `dist/assets/`, then add one object per piece to the array in `content/artwork.json` or `content/photography.json`. Each entry accepts `title`, `description`, `src` (for example `/assets/my-piece.webp`), and `alt`. Use `medium` and `year` for art, or `location` and `date` for photography, when known. Omit missing metadata or use `null`.
 
 Use images you own or have permission to display. Export compressed WebP/JPEG where appropriate; keep enough resolution for the viewer. Preserve artwork proportions. Below-the-fold thumbnails load lazily. The viewer supports previous/next, arrow keys, Escape, close, counts, and focus return.
 
@@ -32,6 +32,6 @@ Review the affected pages on mobile and desktop. Check captions, keyboard naviga
 
 ## Colors and motion
 
-The homepage composition lives in `dist/editorial.css`. The active black/crimson palette, condensed display typography, and contrast overrides live in `dist/dark.css`, loaded after the other styles. Base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
+The homepage composition lives in `dist/editorial.css` and `dist/portrait-edition.css`. The black and crimson palette and condensed display typography live in `dist/dark.css`. Base layout tokens live in `dist/style.css`. Page layouts are in `dist/pages.css`, galleries in `dist/gallery.css`. Motion respects the operating-system preference and can be changed with the footer Motion control. Keep readable contrast when changing colors.
 
 Scroll and pointer effects live in `dist/motion.js` and `dist/motion.css`. The decorative 3D orbit renderer is `dist/orbit-field.js`; the controller owns its animation loop. Keep the `portfolio:motionchange` event in `dist/site.js` connected when changing the footer motion control. Text and links must remain usable with motion off, on touch devices, and without JavaScript.
