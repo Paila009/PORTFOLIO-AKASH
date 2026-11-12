@@ -40,6 +40,22 @@ See [CONTENT-GUIDE.md](CONTENT-GUIDE.md). Update JSON in `content/`, put images 
 
 ## Deployment
 
+GitHub Pages: **https://Paila009.github.io/PORTFOLIO-AKASH/**
+
+The workflow in `.github/workflows/pages.yml` builds, checks, and deploys `dist/` whenever `main` changes. It can also be run manually from the repository's Actions tab. Pages must use **GitHub Actions** as its publishing source. The workflow reads the URL and project base path from GitHub's Pages configuration, so internal links, galleries, responsive images, metadata, and the sitemap use the correct address.
+
+To reproduce the GitHub Pages build locally:
+
+```powershell
+$env:BASE_PATH='/PORTFOLIO-AKASH'
+$env:SITE_URL='https://Paila009.github.io/PORTFOLIO-AKASH'
+node build.mjs
+node check.mjs
+node server.mjs
+```
+
+Open `http://127.0.0.1:4173/PORTFOLIO-AKASH/`. To return to the root-path build, clear `BASE_PATH` and `SITE_URL`, then rebuild. The tracked output keeps the default root-path configuration; Actions creates the GitHub Pages output during each deployment.
+
 Deploy `dist/` to a static host supporting directory index files. Set `404.html` as the missing-page response. Build command: `node build.mjs`. Output directory: `dist`. No install command.
 
 Sites identity and static directory live in `.openai/hosting.json`. The Site uses owner-only access by default. Its access settings determine who can view it. For updates through Sites, use the supported source workflow and deploy the unchanged packaged output. Credentials belong in the workflow hidden stdin, never source files.

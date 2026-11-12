@@ -1,6 +1,7 @@
 /* Native-dialog image viewer. Loaded only by the artwork and photography pages. */
 (() => {
   'use strict';
+  const scriptUrl = document.currentScript.src;
   document.querySelectorAll('[data-gallery]').forEach((gallery) => {
     const cards = Array.from(gallery.querySelectorAll('[data-gallery-item]'));
     const viewer = gallery.querySelector('.gallery-viewer');
@@ -39,7 +40,7 @@
       const imageFallback = () => {
         if (thumbnail.dataset.fallbackApplied) return;
         thumbnail.dataset.fallbackApplied = 'true';
-        const fallback = gallery.classList.contains('gallery-artwork') ? '/assets/placeholder-art.svg' : '/assets/placeholder-photo.svg';
+        const fallback = new URL(gallery.classList.contains('gallery-artwork') ? 'assets/placeholder-art.svg' : 'assets/placeholder-photo.svg', scriptUrl).href;
         thumbnail.src = fallback;
         thumbnail.alt = 'Image unavailable. Development placeholder shown.';
         card.dataset.gallerySource = fallback;
